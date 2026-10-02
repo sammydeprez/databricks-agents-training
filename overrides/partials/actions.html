@@ -1,0 +1,27 @@
+{#-
+  Material's partials/actions.html (copied from mkdocs-material 9.7) plus a
+  "Download PDF" button on every page. The PDF is produced in CI by
+  scripts/build_pdf.py.
+-#}
+{% if page.edit_url %}
+  {% if "content.action.edit" in features %}
+    <a href="{{ page.edit_url }}" title="{{ lang.t('action.edit') }}" class="md-content__button md-icon" rel="edit">
+      {% set icon = config.theme.icon.edit or "material/file-edit-outline" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </a>
+  {% endif %}
+  {% if "content.action.view" in features %}
+    {% if "/blob/" in page.edit_url %}
+      {% set part = "blob" %}
+    {% else %}
+      {% set part = "edit" %}
+    {% endif %}
+    <a href="{{ page.edit_url | replace(part, 'raw') }}" title="{{ lang.t('action.view') }}" class="md-content__button md-icon">
+      {% set icon = config.theme.icon.view or "material/file-eye-outline" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </a>
+  {% endif %}
+{% endif %}
+<a href="{{ 'pdf/genai-labs.pdf' | url }}" title="Download the full course as PDF" class="md-content__button md-icon" download>
+  {% include ".icons/material/file-pdf-box.svg" %}
+</a>

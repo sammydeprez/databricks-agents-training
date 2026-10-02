@@ -1,0 +1,26 @@
+# mkdocs build output
+site/
+
+# local synthetic-data preview output
+data/out/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local tooling artifacts
+.playwright-mcp/

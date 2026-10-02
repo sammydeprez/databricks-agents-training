@@ -1,0 +1,88 @@
+site_name: Generative AI on Databricks, hands-on labs
+site_description: Two-day hands-on, low-code training on building generative AI agents with Databricks
+site_url: https://sammydeprez.github.io/databricks-agents-training/
+repo_url: https://github.com/sammydeprez/databricks-agents-training
+copyright: >
+  &copy; <a href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener">Advancing Analytics</a>.
+  Labs use public and synthetic data only.
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  logo: assets/img/advancing-analytics-icon.png
+  favicon: assets/img/advancing-analytics-icon.png
+  font:
+    text: DM Sans
+    code: Roboto Mono
+  features:
+    - navigation.sections
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - toc.integrate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Light mode
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - glightbox
+  # Combines every page into /print_page/, which scripts/build_pdf.py turns
+  # into the downloadable course PDF. Must stay the last plugin.
+  - print-site:
+      add_cover_page: true
+      # The plugin copies its TOC from the right-hand sidebar, which
+      # toc.integrate removes; scripts/build_pdf.py builds the TOC instead.
+      add_table_of_contents: false
+      enumerate_headings: false
+      print_page_title: Generative AI on Databricks, hands-on labs
+      exclude:
+        - trainer-notes.md
+
+nav:
+  - Home: index.md
+  - Before you start: setup.md
+  - Day 1:
+      - Lab 1, AI Playground: labs/lab1-ai-playground.md
+      - Lab 2, Genie Agent: labs/lab2-genie-agent.md
+      - Governance, evaluation and cost: governance.md
+      - Lab 3, AI Functions in SQL: labs/lab3-ai-functions.md
+      - Lab 3b, Teach Genie Code a skill (captured and hand-written): labs/lab3b-genie-code-skill.md
+  - Day 2:
+      - Lab 4, Knowledge Assistant: labs/lab4-knowledge-assistant.md
+      - Extra, build RAG by hand: labs/extra-rag-from-scratch.md
+      - Lab 5, Supervisor Agent: labs/lab5-supervisor-agent.md
+      - Capstone and use case canvas: capstone.md
+  - Materials and data: materials.md
+  - Trainer notes: trainer-notes.md
