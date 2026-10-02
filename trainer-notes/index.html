@@ -1,0 +1,1105 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Two-day hands-on, low-code training on building generative AI agents with Databricks">
+      
+      
+      
+        <link rel="canonical" href="https://sammydeprez.github.io/databricks-agents-training/trainer-notes/">
+      
+      
+        <link rel="prev" href="../materials/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/img/advancing-analytics-icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Trainer notes - Generative AI on Databricks, hands-on labs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#trainer-notes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Generative AI on Databricks, hands-on labs" class="md-header__button md-logo" aria-label="Generative AI on Databricks, hands-on labs" data-md-component="logo">
+      
+  <img src="../assets/img/advancing-analytics-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Generative AI on Databricks, hands-on labs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Trainer notes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sammydeprez/databricks-agents-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Generative AI on Databricks, hands-on labs" class="md-nav__button md-logo" aria-label="Generative AI on Databricks, hands-on labs" data-md-component="logo">
+      
+  <img src="../assets/img/advancing-analytics-icon.png" alt="logo">
+
+    </a>
+    Generative AI on Databricks, hands-on labs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sammydeprez/databricks-agents-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Before you start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/lab1-ai-playground/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1, AI Playground
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/lab2-genie-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2, Genie Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance, evaluation and cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/lab3-ai-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3, AI Functions in SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/lab3b-genie-code-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3b, Teach Genie Code a skill (captured and hand-written)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/lab4-knowledge-assistant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 4, Knowledge Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/extra-rag-from-scratch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extra, build RAG by hand
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../labs/lab5-supervisor-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 5, Supervisor Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone and use case canvas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../materials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materials and data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trainer notes
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trainer notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#one-week-before" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        One week before
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-1-thursday" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day 1 (Thursday)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#day-2-friday" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Day 2 (Friday)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-snags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known snags
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+<a href="../pdf/genai-labs.pdf" title="Download the full course as PDF" class="md-content__button md-icon" download="">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5zm5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5zm4-3H17v1h1.5V13H17v2h-1.5V9h3zm-6.5 0h1v3h-1zm-5 0h1v1H7z"></path></svg>
+</a>
+
+<h1 id="trainer-notes">Trainer notes<a class="headerlink" href="#trainer-notes" title="Permanent link">¶</a></h1>
+<h2 id="one-week-before">One week before<a class="headerlink" href="#one-week-before" title="Permanent link">¶</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Confirm whose workspace. If it is the client's, check the region supports Knowledge Assistant, Supervisor Agent, AI Functions and pay-per-token models (Databricks page "Features with limited regional availability"). Have a backup workspace in a supported region.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> <strong>Confirm Knowledge Assistant and Supervisor Agent are actually enabled — on a paid workspace too, not just trial.</strong> Both fail immediately with "... is not available. To access this feature, please
+      contact sales for assistance." on trial workspaces, which is the well-known case. But this is a
+      separate Agent Bricks entitlement from the plan tier: a brand-new <strong>paid</strong> Azure workspace hit the
+      identical error in testing, unaffected by any workspace admin setting (including the "Enforce Unity
+      Gateway" toggle below). If you hit this, it needs your Databricks account team to enable Agent
+      Bricks specifically — ask well before Day 1, since it isn't self-service. Genie Agent (Lab 2) and
+      AI Functions (Lab 3) aren't affected either way. Test by actually creating one of each agent type
+      once, don't just check the plan name.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Open <strong>Playground</strong> and confirm you can get a real chat response back, not a hang or a
+      <code>PERMISSION_DENIED</code> error — that's what Lab 1 Part A needs. Two independent failure modes seen in
+      testing, both on a paid workspace:<ul>
+<li>The Playground page itself can hang on model-list loading the very first time it's opened after
+  the workspace is created; reloading a minute or two later fixed it without any config change.</li>
+<li>A model can load and be selectable but still return <code>PERMISSION_DENIED: The endpoint is
+  temporarily disabled due to a Databricks-set rate limit of 0</code> on every prompt — seen consistently
+  with the Claude models (Claude Fable/Opus/Sonnet 5.x) while Llama and GPT OSS models on the same
+  workspace worked fine. If Claude is rate-limited like this, switch the trainee-facing guidance to
+  a Llama or GPT OSS model instead (see the Unity Gateway naming note below) rather than trying to
+  fix the rate limit — it did not respond to the "Enforce Unity Gateway" toggle in testing and looks
+  like a platform-side limit, not a workspace setting.</li>
+</ul>
+</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> <strong>Run Lab 3b end to end in the training workspace, both parts.</strong> Verified on 1 October 2026:
+      Genie Code no longer has an Agent/Chat mode — the selector at the bottom of the panel is now
+      <strong>Effort: Auto / Low</strong>, and it's agentic either way. On that workspace <strong>Auto</strong> failed with "This
+      workspace has no daily token allowance for the assistant" while <strong>Low</strong> worked for both parts
+      (capture the minutes skill; hand-write <code>maintenance-sql</code>, which changed the overdue count from 624
+      to 532 and added its fingerprint line). If Auto works on the day, participants can use it; if
+      even Low fails, drop Lab 3b and use the 50 minutes as a longer break. Two things to say out loud:
+      every <strong>new chat</strong> resets the effort to Auto, and Genie Code can't start a stopped
+      <code>training-warehouse</code> — someone has to run a query in the SQL editor first.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Serverless compute, a serverless SQL warehouse named <code>training-warehouse</code>, and a serverless usage policy with a nonzero budget.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Participant accounts with rights to create agents and use Model Serving.</li>
+<li class="task-list-item">
+<p><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> <strong>Decide which catalog participants use, and make sure they can create a schema in it.</strong> The
+      <strong>lab_data</strong> notebook has a <strong>Catalog</strong> box: left empty it uses the workspace's default catalog
+      (<code>SELECT current_catalog()</code> in the SQL editor shows which one — often named after the
+      workspace); filled in, it uses that catalog. If the default catalog works, participants type
+      nothing. If not, pick or create one and tell everyone its name on Day 1. Either way, grant once:</p>
+<div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="n">USE</span><span class="w"> </span><span class="k">CATALOG</span><span class="p">,</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CATALOG</span><span class="w"> </span><span class="o">&lt;</span><span class="k">catalog</span><span class="o">&gt;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">account</span><span class="w"> </span><span class="n">users</span><span class="o">`</span><span class="p">;</span>
+</code></pre></div>
+<p>Swap <code>`account users`</code> for a specific group if you don't want to grant this to everyone in the
+account. A participant who typed a catalog for setup must type the same one again for cleanup on
+Day 2. A default catalog of <code>hive_metastore</code> won't work — the notebook stops and asks for a name.
+That's the only prep needed — participants import the <strong>lab_data</strong> notebook straight from GitHub
+themselves, and it comes with its own copy of the Lab 4 PDFs bundled in, see
+<a href="../setup/">Before you start</a>.
+- [ ] Build and sync the backup Knowledge Assistant.
+- [ ] Run every lab end to end in the exact workspace and fix any menu names that changed.
+- [ ] Send the guide URL to the client and ask them to open it on a corporate laptop.
+- [ ] Print the use case canvas, one per team, plus sticky notes and markers.</p>
+</li>
+</ul>
+<h2 id="day-1-thursday">Day 1 (Thursday)<a class="headerlink" href="#day-1-thursday" title="Permanent link">¶</a></h2>
+<p>Thursday opens with theory (how LLMs work, embeddings, tool calling, RAG, agents) before the first
+lab — see the slide deck for that material, not covered in this guide. After lunch the order is Lab 1,
+Lab 2, Governance, Lab 3, Lab 3b, then Lab 4 Part A and the capstone-case vote.</p>
+<p>Lab 4 Part A and the capstone-case vote have to be last, since the overnight sync is the whole reason
+for doing them today. If Lab 3b's pre-Day-1 check fails (see the checklist item above), skip it and use
+the time as a longer break instead.</p>
+<ul>
+<li>Open with the survey results, not the agenda. Say out loud: "You told us you want to build agents —
+  that's exactly what these two days are: five agents, end to end." Ask who in the room writes the
+  Annual Operating Report (AOR); it comes back in the capstone case list. This costs two minutes and
+  directly answers their top wish, which the course already delivers but they don't yet know that.</li>
+<li>Start the day with the data rule on screen.</li>
+<li>Databricks basics: a quick check that everyone can find <strong>SQL Editor</strong>, <strong>Genie</strong>, <strong>Agents</strong> and
+  <strong>Playground</strong> (see <a href="../setup/">Before you start</a>) — skip the full navigation tour.</li>
+<li>Lab 1's "writing agent instructions" block (Part A) is the direct answer to "how do I write the
+  rules," which came up explicitly in the pre-course survey. Call that out by name when you get there.
+  The same instruction pattern — role, rules, tone, what to refuse — recurs in Lab 2 (Genie Agent
+  instructions) and Lab 4 (Knowledge Assistant instructions); point that continuity out each time so it
+  reads as one skill, not three unrelated ones.</li>
+<li>Lab 4 Part A (create the Knowledge Assistant) must run at the end of Day 1 regardless of what happens
+  in the capstone — the first document sync takes hours. See the warning in
+  <a href="../labs/lab4-knowledge-assistant/">Lab 4</a>.</li>
+<li>End of day: teams vote on their Friday capstone case (see <a href="../capstone/">Capstone</a>) right after
+  building their Lab 4 Knowledge Assistant. Any team choosing <strong>Memo and approval helper</strong> adds
+  <code>memo_templates</code> as a second source on that same Knowledge Assistant, right now, so it syncs alongside
+  the regulations overnight — there is no time for a first sync on Friday morning. Teams doing the other
+  two cases don't need to do anything extra tonight.</li>
+</ul>
+<h2 id="day-2-friday">Day 2 (Friday)<a class="headerlink" href="#day-2-friday" title="Permanent link">¶</a></h2>
+<ul>
+<li>Labs 4 and 5 are back to back; skip stretch tasks if a lab overruns.</li>
+<li>Time the pitches strictly: three minutes plus one question.</li>
+<li>End of Day 2, before people leave: each participant deletes the agents they created (Genie Agent,
+  Knowledge Assistant, Supervisor Agent) from the <strong>Agents</strong> page, then reopens their <strong>lab_data</strong>
+  notebook, switches it to <strong>Clean up my data</strong>, and runs it to drop their schema. Two minutes — see the
+  <strong>Clean up</strong> step at the end of the capstone page.</li>
+</ul>
+<h2 id="known-snags">Known snags<a class="headerlink" href="#known-snags" title="Permanent link">¶</a></h2>
+<ul>
+<li>
+<p><strong>RAG-from-scratch demo</strong> (<code>notebooks/rag_from_scratch.py</code>, guide page <a href="../labs/extra-rag-from-scratch/">Extra: build RAG by hand</a>).
+  Measured on serverless on 1 October 2026: <strong>Quick</strong> (FANR-REG-12 and -17) runs end to end in about
+  2 minutes; <strong>All 6</strong> in about 4 minutes (3,700 elements, ~795 chunks). Good moment to demo it: right
+  after Lab 4 Part B, while the Knowledge Assistant's answers are fresh. It calls models through Unity
+  Gateway (<code>/ai-gateway/mlflow/v1/chat/completions</code>, <code>system.ai.gpt-oss-120b</code>, embeddings
+  <code>system.ai.gte-large-en</code>) because the classic <code>databricks-*</code> endpoints are disabled on the training
+  workspace; if the chat model changes, edit <code>CHAT_MODEL</code> in Step 6. <code>ai_parse_document</code> is not
+  deterministic — element and chunk counts shift a little between runs; say so before someone asks.
+  Answer 2 usually contains at least one uncited sentence: that's the point of the cell after it.</p>
+</li>
+<li>
+<p>Playground tool calls need serverless enabled and USE CATALOG, USE SCHEMA and EXECUTE on the function.</p>
+</li>
+<li>GPT OSS 120B can throw an <code>InternalError</code> ("reasonPhrase contains one of the following prohibited
+  characters") on some Lab 1 Part C tool-calling prompts. It's the model endpoint, not the lab steps —
+  switch to a different <strong>Tools enabled</strong> model (Meta Llama 3.3 70B Instruct worked in testing) and
+  retry.</li>
+<li>Newer workspaces route pay-per-token models through <strong>Unity Gateway</strong> (left navigation, under AI/ML)
+  instead of the classic <strong>Serving</strong> page — Serving may show "No endpoints found" even though models
+  work fine. Model names also change: the old <code>databricks-&lt;model&gt;</code> form (e.g.
+  <code>databricks-meta-llama-3-3-70b-instruct</code>) can start failing in <code>ai_query</code> with "Endpoint ... does not
+  exist" or "is disabled for this workspace, use Unity Gateway", once an admin turns on <strong>Settings &gt;
+  Workspace admin &gt; Advanced &gt; Enforce Unity Gateway</strong>. The fix is the fully-qualified name shown on the
+  model's page under <strong>AI Gateway &gt; Models</strong>, e.g. <code>system.ai.meta-llama-3-3-70b-instruct</code> (no
+  <code>databricks-</code> prefix). Playground's own model picker can also lag behind Unity Gateway — a model
+  listed there under <strong>AI Gateway</strong> may not appear in Playground's "Select an endpoint" search at all;
+  opening that model's page and clicking <strong>Chat in playground</strong> works around it.</li>
+<li>AI Functions fail on Classic or Pro SQL warehouses.</li>
+<li><code>ai_translate</code> handled Arabic fine both ways (Arabic→English and English→Arabic) in testing on this
+  release — an earlier version of this guide said otherwise. If a participant hits a real translation
+  gap for some other language, that's worth reporting, not assuming.</li>
+<li>A fresh trial workspace shows an empty Playground until pay-per-token models are enabled or an
+  external model is connected — don't mistake this for the model-list hang above; check entitlements
+  first on a trial workspace specifically.</li>
+<li>Knowledge Assistant skips files over 100 MB or 500 pages.</li>
+<li>Genie Code (the assistant behind Lab 3b) hit a genuinely broken state once during testing — the panel
+  stuck on "Loading" indefinitely, with console errors climbing into the hundreds, across a fresh
+  browser tab and a full page reload, resolving only after a longer wait. Unclear if this was a one-off
+  outage or a repeatable issue; that's exactly why Lab 3b needs the live pre-Day-1 check above rather
+  than being trusted on this description alone.</li>
+<li>Lab 3b Part B: <strong>Create &gt; File</strong> in the workspace makes <code>New File &lt;date&gt;.py</code> immediately, with no
+  name prompt. Participants rename it by double-clicking the name in the editor tab. A skill file that
+  stays <code>.py</code> is never loaded — the first thing to check when "my skill does nothing".</li>
+<li>The <strong>lab_data</strong> notebook needs outbound internet access to clone the repo from GitHub. Earlier
+  versions also fetched the Lab 4 PDFs live from fanr.gov.ae/iaea.org, which failed with <code>Temporary
+  failure in name resolution</code> on serverless compute (its network policy commonly allows GitHub/PyPI but
+  blocks arbitrary external sites) — the PDFs now ship inside the repo itself, so that specific failure
+  is gone. If the GitHub clone itself fails, the workspace's network policy is blocking GitHub too, and
+  that needs an admin to allow-list it (or run on a classic cluster, which usually has normal internet
+  access).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../materials/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Materials and data">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Materials and data
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © <a href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener">Advancing Analytics</a>. Labs use public and synthetic data only.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "toc.integrate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

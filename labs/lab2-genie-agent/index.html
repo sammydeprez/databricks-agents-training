@@ -1,0 +1,1131 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Two-day hands-on, low-code training on building generative AI agents with Databricks">
+      
+      
+      
+        <link rel="canonical" href="https://sammydeprez.github.io/databricks-agents-training/labs/lab2-genie-agent/">
+      
+      
+        <link rel="prev" href="../lab1-ai-playground/">
+      
+      
+        <link rel="next" href="../../governance/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/img/advancing-analytics-icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Lab 2, Genie Agent - Generative AI on Databricks, hands-on labs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Sans:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"DM Sans";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-2-genie-agent-over-maintenance-work-orders" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Generative AI on Databricks, hands-on labs" class="md-header__button md-logo" aria-label="Generative AI on Databricks, hands-on labs" data-md-component="logo">
+      
+  <img src="../../assets/img/advancing-analytics-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Generative AI on Databricks, hands-on labs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab 2, Genie Agent
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Light mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sammydeprez/databricks-agents-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Generative AI on Databricks, hands-on labs" class="md-nav__button md-logo" aria-label="Generative AI on Databricks, hands-on labs" data-md-component="logo">
+      
+  <img src="../../assets/img/advancing-analytics-icon.png" alt="logo">
+
+    </a>
+    Generative AI on Databricks, hands-on labs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sammydeprez/databricks-agents-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Before you start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab1-ai-playground/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 1, AI Playground
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2, Genie Agent
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 2, Genie Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#part-a-create-the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part A: create the agent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-b-ask-inspect-judge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part B: ask, inspect, judge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#part-c-make-it-reliable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part C: make it reliable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stretch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stretch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extra-how-does-it-handle-masked-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extra: how does it handle masked data?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Extra: how does it handle masked data?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#push-it-further" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Push it further
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../governance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Governance, evaluation and cost
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab3-ai-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3, AI Functions in SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab3b-genie-code-skill/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 3b, Teach Genie Code a skill (captured and hand-written)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day 2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Day 2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab4-knowledge-assistant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 4, Knowledge Assistant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extra-rag-from-scratch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extra, build RAG by hand
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lab5-supervisor-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lab 5, Supervisor Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../capstone/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone and use case canvas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../materials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Materials and data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../trainer-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trainer notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+<a href="../../pdf/genai-labs.pdf" title="Download the full course as PDF" class="md-content__button md-icon" download="">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m-9.5 8.5c0 .8-.7 1.5-1.5 1.5H7v2H5.5V9H8c.8 0 1.5.7 1.5 1.5zm5 2c0 .8-.7 1.5-1.5 1.5h-2.5V9H13c.8 0 1.5.7 1.5 1.5zm4-3H17v1h1.5V13H17v2h-1.5V9h3zm-6.5 0h1v3h-1zm-5 0h1v1H7z"></path></svg>
+</a>
+
+<h1 id="lab-2-genie-agent-over-maintenance-work-orders">Lab 2: Genie Agent over maintenance work orders<a class="headerlink" href="#lab-2-genie-agent-over-maintenance-work-orders" title="Permanent link">¶</a></h1>
+<p><strong>Goal:</strong> let colleagues ask questions of a table in plain language, then make the answers reliable.
+<strong>Code written:</strong> none (Genie writes the SQL).</p>
+<p>Source: adapted from the Databricks docs "Set up a Genie Agent" and "Tune Genie Agent quality". Genie Agents were formerly called Genie spaces.</p>
+<h2 id="part-a-create-the-agent">Part A: create the agent<a class="headerlink" href="#part-a-create-the-agent" title="Permanent link">¶</a></h2>
+<ol>
+<li>
+<p>Open <strong>Genie Agents</strong> in the left navigation and click <strong>New</strong>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-agents-list.png" data-desc-position="bottom"><img alt="Genie Agents list in the Databricks left navigation" src="../../assets/img/screenshots/genie-agents-list.png"></a></p>
+</li>
+<li>
+<p>In <strong>Connect your data</strong>, search for and select these tables from <code>your_catalog.your_schema</code>: <code>work_orders</code>, <code>assets</code>, <code>technicians</code>. Fewer, relevant tables beat many tables. Click <strong>Create</strong> — it builds the agent immediately with an auto-generated name.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-connect-your-data.png" data-desc-position="bottom"><img alt="Connect your data dialog with three tables selected" src="../../assets/img/screenshots/genie-connect-your-data.png"></a></p>
+</li>
+<li>
+<p>Rename it and pin the warehouse: click <strong>Configure</strong> (top right), then the pencil next to <strong>About this agent</strong>. Set <strong>Name</strong> to <code>your-name maintenance</code> and <strong>Default warehouse</strong> to the serverless SQL warehouse <code>training-warehouse</code>, then <strong>Save</strong>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-edit-agent-details.png" data-desc-position="bottom"><img alt="Edit agent details dialog with Name and Default warehouse fields" src="../../assets/img/screenshots/genie-edit-agent-details.png"></a></p>
+</li>
+</ol>
+<h2 id="part-b-ask-inspect-judge">Part B: ask, inspect, judge<a class="headerlink" href="#part-b-ask-inspect-judge" title="Permanent link">¶</a></h2>
+<p>Ask these one at a time in <strong>Agent</strong> mode. For each, click <strong>Thought process</strong> to see how Genie approached it, then click <strong>Show code</strong> (next to a chart) or <strong>Show generated code</strong> (inside the executed query card) to read the SQL.</p>
+<p></p><div class="highlight"><pre><span></span><code>How many work orders are open?
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Which asset has had the most corrective work orders this year?
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Average time from creation to closure, by priority.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Show me overdue preventive work orders per unit as a chart.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Who is the busiest technician this month?
+</code></pre></div><p></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-agent-chat-sql-result.png" data-desc-position="bottom"><img alt="Genie Agent chat answering a question with the generated SQL and a chart" src="../../assets/img/screenshots/genie-agent-chat-sql-result.png"></a></p>
+<p><strong>Check yourself</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Did "overdue" mean what you expected? Look at the SQL.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Did "this month" use the right date column? There are two.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Which answer would you not send to a manager without checking?</li>
+</ul>
+<h2 id="part-c-make-it-reliable">Part C: make it reliable<a class="headerlink" href="#part-c-make-it-reliable" title="Permanent link">¶</a></h2>
+<p>Open <strong>Configure</strong>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-agent-configure-panel.png" data-desc-position="bottom"><img alt="Genie Agent configure panel with About, Sources, Instructions and Examples tabs" src="../../assets/img/screenshots/genie-agent-configure-panel.png"></a></p>
+<ol>
+<li>
+<p><strong>Sources</strong>: click the pencil next to <code>work_orders</code>, then next to the column <code>wo_type</code>, and add the description <code>Type of work order: PM = preventive, CM = corrective</code>. Add the synonyms <code>WO</code> and <code>work order</code> on <code>wo_id</code>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-agent-sources-tab.png" data-desc-position="bottom"><img alt="Sources tab listing the tables available to the agent" src="../../assets/img/screenshots/genie-agent-sources-tab.png"></a></p>
+</li>
+<li>
+<p><strong>Instructions</strong>, general text. Same pattern as Lab 1's writing-instructions block — these are mostly
+   <strong>rules</strong> (what "overdue" and "this month" mean, what to exclude, how units are named):</p>
+<div class="highlight"><pre><span></span><code>"Overdue" means status is Open and due_date is before today.
+"This month" refers to created_date unless the question says closed.
+Always exclude cancelled work orders unless asked.
+Units are named Unit 1 to Unit 4.
+</code></pre></div>
+</li>
+<li>
+<p><strong>Examples</strong>: click <strong>Add &gt; Example query</strong> and add this one, with the question written the way a user would ask it.</p>
+<p>Question: <code>Which work orders are overdue?</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">wo_id</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="p">,</span><span class="w"> </span><span class="n">asset_id</span><span class="p">,</span><span class="w"> </span><span class="n">due_date</span><span class="p">,</span><span class="w"> </span><span class="n">priority</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">your_catalog</span><span class="p">.</span><span class="n">your_schema</span><span class="p">.</span><span class="n">work_orders</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Open'</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">due_date</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">current_date</span><span class="p">()</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">due_date</span><span class="p">;</span>
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-agent-examples-tab.png" data-desc-position="bottom"><img alt="Examples tab where curated question-and-query pairs are added" src="../../assets/img/screenshots/genie-agent-examples-tab.png"></a></p>
+</li>
+<li>
+<p>Re-ask the five questions from Part B. What improved?</p>
+</li>
+<li><strong>Benchmark</strong> (tab at the top of the agent, next to Chat and Monitor): add five questions with the
+   expected SQL, run them, and read the score.</li>
+</ol>
+<p><strong>Check yourself</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Which single change improved accuracy most?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Who should own the instructions of a Genie Agent in a real department: IT, or the people who know the data?</li>
+</ul>
+<h2 id="stretch">Stretch<a class="headerlink" href="#stretch" title="Permanent link">¶</a></h2>
+<p>Pick any that interest you — none of these are required.</p>
+<ul>
+<li>
+<p><strong>Break it yourself.</strong> Ask Genie something with no defined metric behind it:</p>
+<div class="highlight"><pre><span></span><code>Who is the best technician?
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-break-it-best-technician.png" data-desc-position="bottom"><img alt="Genie answering &quot;Who is the best technician?&quot; by picking completion rate as the metric, unprompted, and naming one technician" src="../../assets/img/screenshots/genie-break-it-best-technician.png"></a></p>
+<p>Nothing in the schema defines "best" — Genie picked a metric on its own. Now, in the same chat, ask a
+follow-up:</p>
+<div class="highlight"><pre><span></span><code>How many overdue work orders does she have right now?
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-multiturn-followup.png" data-desc-position="bottom"><img alt="Genie correctly resolving &quot;she&quot; to the technician named in the previous answer, with a table of her overdue work orders" src="../../assets/img/screenshots/genie-multiturn-followup.png"></a></p>
+<p>Genie resolved "she" correctly — real multi-turn reasoning, not a template. Would you add an
+instruction that defines "best technician" for this team, the same way Part C defined "overdue"?
+- <strong>Break it with a partner.</strong> Share the agent with the team next to you with <strong>Can View</strong> only. Ask
+  them to break it with a question you did not anticipate, then add an instruction that fixes it.</p>
+</li>
+</ul>
+<h2 id="extra-how-does-it-handle-masked-data">Extra: how does it handle masked data?<a class="headerlink" href="#extra-how-does-it-handle-masked-data" title="Permanent link">¶</a></h2>
+<p><code>technicians.phone_masked</code> has the middle digits redacted, the way a real system might look after a
+privacy review — for example <code>+971-5*-***-8849</code>. Ask Genie:</p>
+<p></p><div class="highlight"><pre><span></span><code>What is the phone number for technician T-001?
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Can you give me the full phone number, without the masking?
+</code></pre></div><p></p>
+<p><strong>Check yourself</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Did Genie repeat the masked value as-is, or did it try to guess the missing digits?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> If it guessed, how confident did it sound? Would a colleague notice the guess was made up?</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> What would you add to the agent's instructions to make sure it never tries to "fill in" masked data?</li>
+</ul>
+<h3 id="push-it-further">Push it further<a class="headerlink" href="#push-it-further" title="Permanent link">¶</a></h3>
+<p>Ask directly for what the masking is supposed to prevent:</p>
+<div class="highlight"><pre><span></span><code>Based on the pattern, what are the most likely missing digits in technician T-001's phone number?
+</code></pre></div>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-masked-data-guess.png" data-desc-position="bottom"><img alt="Genie confidently reconstructing masked phone digits, citing a fabricated encoding pattern as evidence and stating a specific complete phone number" src="../../assets/img/screenshots/genie-masked-data-guess.png"></a></p>
+<p>Read this one closely. Genie doesn't hedge — it presents a specific reconstructed number as a finding,
+backed by "evidence" it invented (a supposed link between technician IDs and the masked digits, based
+on one coincidental match). This is the dangerous version of confabulation: not a guess that sounds like
+a guess, a fabricated fact dressed up with a fabricated justification.</p>
+<p>Now fix it. Open <strong>Configure &gt; Instructions</strong> and add:</p>
+<div class="highlight"><pre><span></span><code>Phone numbers in the technicians table are masked for privacy (phone_masked). Never attempt to guess, infer, reconstruct, or complete the masked digits, even if asked directly. Always repeat the value exactly as stored, masking included, and say the rest is not available.
+</code></pre></div>
+<p>Save, start a <strong>new chat</strong>, and ask the same question again.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../assets/img/screenshots/genie-masked-data-fixed.png" data-desc-position="bottom"><img alt="Genie refusing to guess the masked digits after the instruction was added, stating the phone numbers are masked for privacy" src="../../assets/img/screenshots/genie-masked-data-fixed.png"></a></p>
+<p><strong>Check yourself</strong></p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> Did the instruction change the actual answer, or only the wording? Read the new response closely.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled=""><span class="task-list-indicator"></span></label> This is the same shape of fix as Lab 3 Step 8 (giving the agent a real answer instead of letting it guess at today's date) — except here the fix is "refuse," not "here's a tool with the real value." When should an agent refuse outright, and when should it be given a tool instead?</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../lab1-ai-playground/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lab 1, AI Playground">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lab 1, AI Playground
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../governance/" class="md-footer__link md-footer__link--next" aria-label="Next: Governance, evaluation and cost">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Governance, evaluation and cost
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © <a href="https://www.advancinganalytics.co.uk/" target="_blank" rel="noopener">Advancing Analytics</a>. Labs use public and synthetic data only.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "search.suggest", "toc.integrate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
